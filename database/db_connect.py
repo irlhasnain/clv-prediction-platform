@@ -1,7 +1,7 @@
 import sqlite3
 import os
 
-DB_PATH = os.path.join(os.dirname(__file__),'clv.db')
+DB_PATH = os.path.join(os.path.dirname(__file__),'clv.db')
 
 def get_connection():
     conn = sqlite3.connect(DB_PATH)
@@ -14,3 +14,7 @@ def create_tables():
     conn.executescript(schema)
     conn.commit()
     conn.close
+    print("Table created successfully")
+
+if __name__ == "__main__":
+    create_tables()
