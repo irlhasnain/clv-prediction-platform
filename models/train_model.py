@@ -16,4 +16,18 @@ def train_clv_model():
     model = RandomForestRegressor(n_estimators=100, random_state=42)
     model.fit(X_train, Y_train)
 
+    prediction = model.predict(X_test)
+    mae = mean_absolute_error(Y_test, prediction)
+    rmse = np.sqrt(mean_squared_error(Y_test, prediction))
+
+    print(f"Model MAE : {mae:.2f}")
+    print(f"Model RMSE : {rmse:.2f}")
+
+    joblib.dump(model, 'models/clv_model.pkl')
+    print("Model saved to models/clv_model.pkl")
+
+    return model, mae, rmse
+
+if __name__ == "__main__":
+    train_clv_model()
     
