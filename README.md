@@ -96,7 +96,7 @@ Visit `http://127.0.0.1:8000/docs` for the interactive API documentation.
 
 ## 🔗 Live Demo
 
-*(Deploy hone ke baad link yahan aayega)*
+[API Documentation](https://clv-prediction-platform-t672.onrender.com/docs)
 
 ## 📝 License
 
