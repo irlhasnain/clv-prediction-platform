@@ -27,3 +27,77 @@ clv-prediction-platform/
 ├── tests/ # Unit tests
 └── requirements.txt
 ```
+## 🔧 Tech Stack
+
+- **Language**: Python
+- **Database**: SQLite
+- **ML**: scikit-learn (Random Forest)
+- **API**: FastAPI, Pydantic, Uvicorn
+- **Testing**: Pytest, httpx
+
+## 📈 Key Results
+
+- Prophet... *(if applicable, otherwise remove)*
+- Random Forest CLV model achieved an MAE of **[apna number daalo]**, compared to a formula-based baseline MAE of **[apna number daalo]**
+- API responds to prediction requests in real time via a single POST call
+
+## 🚀 How to Run Locally
+
+```bash
+# Clone the repo
+git clone https://github.com/irlhasnain/clv-prediction-platform.git
+cd clv-prediction-platform
+
+# Create virtual environment
+python -m venv venv
+venv\Scripts\activate      # Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up database and run ETL
+python -m database.db_connect
+python -m etl.clean_data
+python -m etl.load_data
+
+# Build features and train model
+python -m features.build_feature
+python -m models.train_model
+
+# Run tests
+pytest tests/
+
+# Start the API
+uvicorn api.main:app --reload
+```
+
+Visit `http://127.0.0.1:8000/docs` for the interactive API documentation.
+
+## 📡 API Usage Example
+
+**Endpoint**: `POST /predict`
+
+**Request:**
+```json
+{
+  "frequency": 5,
+  "recency": 30,
+  "customer_age_days": 365,
+  "avg_order_value": 150
+}
+```
+
+**Response:**
+```json
+{
+  "predicted_clv": 2450.75
+}
+```
+
+## 🔗 Live Demo
+
+*(Deploy hone ke baad link yahan aayega)*
+
+## 📝 License
+
+This project is licensed under the MIT License.
