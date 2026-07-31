@@ -15,6 +15,7 @@ Unlike traditional batch-analytics projects, this system is built as a **product
 ## 🏗️ Architecture
 
 ## 📁 Project Structure
+```
 clv-prediction-platform/
 ├── data/ # Raw and processed datasets
 ├── database/ # DB connection and schema
@@ -25,3 +26,4 @@ clv-prediction-platform/
 ├── notebooks/ # Experimentation notebooks
 ├── tests/ # Unit tests
 └── requirements.txt
+```
