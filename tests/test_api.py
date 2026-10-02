@@ -1,5 +1,7 @@
-from fastapi.testclient import TestClient
 import sys
+
+from fastapi.testclient import TestClient
+
 sys.path.append('.')
 from api.main import app
 

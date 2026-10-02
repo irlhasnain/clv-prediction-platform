@@ -1,5 +1,7 @@
-import pandas as pd 
+import pandas as pd
+
 from database.db_connect import get_connection
+
 
 def load_customers(df, conn):
     customer_df = df[['customer_id', 'customer_name', 'segment', 'region']].drop_duplicates()

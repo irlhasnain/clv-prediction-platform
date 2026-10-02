@@ -1,6 +1,7 @@
+import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error
-import numpy as np 
+
 
 def baseline_prediction():
     df = pd.read_csv('data/processed/customer_features.csv')

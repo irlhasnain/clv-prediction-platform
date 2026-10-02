@@ -1,7 +1,7 @@
-from fastapi import FastAPI
-from pydantic import BaseModel
 import joblib
 import pandas as pd
+from fastapi import FastAPI
+from pydantic import BaseModel
 
 app = FastAPI(title="CLV Prediction API")
 
@@ -19,7 +19,7 @@ def health_check():
 
 @app.post("/predict")
 def predict_clv(customer: CustomerFeatures):
-    input_df = pd.DataFrame([customer.dict()])
+    input_df = pd.DataFrame([customer.model_dump()])
     prediction = model.predict(input_df)[0]
     
     return {"predicted_clv": round(float(prediction), 2)}
