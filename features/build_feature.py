@@ -1,7 +1,10 @@
-import pandas as pd
 import sys
+
+import pandas as pd
+
 sys.path.append('.')
 from database.db_connect import get_connection
+
 
 def build_customer_features():
     conn = get_connection()
