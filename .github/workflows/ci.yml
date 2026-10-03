@@ -17,8 +17,8 @@ jobs:
       - run: ruff check .
       - run: pytest tests/ -q
 
-docker:
-  needs: test
+  docker:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
