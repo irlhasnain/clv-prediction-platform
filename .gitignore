@@ -6,3 +6,4 @@ data/raw/*.csv
 .ipynb_checkpoints/
 mlruns/
 mlartifacts/
+mlflow.db
