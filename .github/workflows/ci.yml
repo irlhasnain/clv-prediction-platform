@@ -16,3 +16,10 @@ jobs:
       - run: pip install -r requirements.txt -r requirements-dev.txt
       - run: ruff check .
       - run: pytest tests/ -q
+
+docker:
+  needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t clv-platform .
