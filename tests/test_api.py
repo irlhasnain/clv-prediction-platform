@@ -27,3 +27,13 @@ def test_predict_invalid_input():
     payload = {"frequency": "not_a_number"}
     response = client.post("/predict", json=payload)
     assert response.status_code == 422  
+
+def test_predict_missing_field():
+    r = client.post("/predict", json={"frequency": 5})
+    assert r.status_code == 422
+
+def test_predict_non_negative():
+    payload = {"frequency": 5, "recency": 30, "customer_age_days": 365, "avg_order_value": 150}
+    r = client.post("/predict", json=payload)
+    assert r.status_code == 200
+    assert r.json()["predicted_clv"] >= 0
