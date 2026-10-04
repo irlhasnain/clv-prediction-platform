@@ -1,4 +1,4 @@
-import pandas as pd 
+import pandas as pd
 
 FEATURES = ["frequency", "recency", "customer_age_days", "avg_order_value"]
 

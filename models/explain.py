@@ -1,9 +1,6 @@
-import joblib 
-import matplotlib
-
-matplotlib.use('Agg')
+import joblib
 import matplotlib.pyplot as plt
-import pandas as pd 
+import pandas as pd
 import shap
 
 FEATURES = ["frequency", "recency", "customer_age_days", "avg_order_value"]
