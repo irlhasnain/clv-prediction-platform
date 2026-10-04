@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.ensemble import GradientBoostingRegressor, RandomForestRegressor
 from sklearn.linear_model import Ridge
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold, cross_val_score, train_test_split
 
 FEATURE = ["frequency", "recency", "customer_age_days", "avg_order_value"]
 TARGET = "monetary"
@@ -34,6 +34,15 @@ experiments = {
 
 mlflow.set_experiment("customer_lifetime_value_prediction")
 
+baseline_pred = X_test["frequency"] * X_test["avg_order_value"]
+baseline_mae = mean_absolute_error(y_test, baseline_pred)
+baseline_rmse = np.sqrt(mean_squared_error(y_test, baseline_pred))
+baseline_r2 = r2_score(y_test, baseline_pred)
+
+with mlflow.start_run(run_name="formula_baseline"):
+    mlflow.log_metrics({"mae": baseline_mae, "rmse": baseline_rmse, "r2": baseline_r2})
+print(f"Baseline: MAE: {baseline_mae:.2f}, RMSE: {baseline_rmse:.2f}, R2: {baseline_r2:.3f}")
+
 for name, (model, params) in experiments.items():
     with mlflow.start_run(run_name=name):
         mlflow.log_param("model_type", type(model).__name__)
@@ -54,3 +63,10 @@ for name, (model, params) in experiments.items():
         )
 
         print(f"{name}: MAE: {mae:.2f}, RMSE: {rmse:.2f}, R2: {r2:.3f}")
+
+cv = KFold(n_splits=5, shuffle=True, random_state=42)
+cv_mae = -cross_val_score(
+    RandomForestRegressor(n_estimators=100, random_state=42),
+    X, y, cv=cv, scoring="neg_mean_absolute_error",
+)
+print(f"RF 5-fold CV MAE: {cv_mae.mean():.2f} ± {cv_mae.std():.0f}")
